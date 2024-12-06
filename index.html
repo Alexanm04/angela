@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LOVE YOU ANGELITA🩵</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f8f9fa;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      align-items: center;
+      height: 100vh;
+      text-align: center;
+      overflow: hidden;
+    }
+    .content {
+      text-align: center;
+      flex-grow: 1;
+    }
+    h1 {
+      font-size: 3em;
+      color: #333;
+    }
+    .response {
+      font-size: 2em;
+      margin-top: 20px;
+      color: #007bff;
+    }
+    .button-container {
+      margin-top: 30px;
+    }
+    button {
+      font-size: 1.5em;
+      padding: 15px 30px;
+      margin: 15px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+    button:hover {
+      background-color: #007bff;
+      color: white;
+    }
+    #yes-button {
+      background-color: #28a745;
+    }
+    #no-button {
+      background-color: #dc3545;
+    }
+    .hidden {
+      display: none;
+    }
+    .final-message {
+      font-size: 3em;
+      color: #333;
+    }
+    #retry-button {
+      background-color: #ffc107;
+      color: black;
+    }
+    img {
+      width: 30%;  /* Asegura que la imagen ocupe el ancho completo */
+      height: auto;  /* Mantiene la relación de aspecto original */
+      max-height: 100%;  /* Limita la altura máxima de la imagen */
+      object-fit: contain;  /* Asegura que la imagen se ajuste dentro del área sin recortarse */
+    }
+  </style>
+</head>
+<body>
+  <div class="content">
+    <div id="question">
+      <h1>¿Eres la mejor novia del mundo?</h1>
+      <div class="button-container">
+        <button id="yes-button" onclick="answer('yes')">Sí</button>
+        <button id="no-button" onclick="answer('no')">No</button>
+      </div>
+    </div>
+    <div class="response" id="response"></div>
+  </div>
+
+  <script>
+    function answer(choice) {
+      // Ocultar la pregunta y los botones
+      document.getElementById('question').classList.add('hidden');
+      
+      let responseText = "";
+      let retryButton = ""; // Variable para el botón de reintentar
+      let image = ""; // Variable para insertar la imagen
+
+      if (choice === 'yes') {
+        responseText = "Te amo mucho mi niña🩵";
+        image = '<img src="foto.jpg" alt="Imagen de amor">'; // Aquí insertamos la imagen
+      } else if (choice === 'no') {
+        responseText = "¡TE HAS EQUIVOCADO ES QUE SI!";
+        retryButton = '<button id="retry-button" onclick="retry()">Intentalo de nuevo mi niña</button>';
+      }
+      
+      // Mostrar el mensaje final, la imagen (si es "Sí") y el botón de reintentar si es necesario
+      let responseDiv = document.getElementById('response');
+      responseDiv.innerHTML = `
+        <div class="final-message">${responseText}</div>
+        ${image}
+        ${retryButton}
+      `;
+    }
+
+    function retry() {
+      // Volver a mostrar la pregunta y los botones
+      document.getElementById('question').classList.remove('hidden');
+      document.getElementById('response').innerHTML = "";
+    }
+  </script>
+</body>
+</html>
