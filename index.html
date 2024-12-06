@@ -64,10 +64,31 @@
       color: black;
     }
     img {
-      width: 30%;  /* Asegura que la imagen ocupe el ancho completo */
-      height: auto;  /* Mantiene la relación de aspecto original */
-      max-height: 100%;  /* Limita la altura máxima de la imagen */
-      object-fit: contain;  /* Asegura que la imagen se ajuste dentro del área sin recortarse */
+      width: 30%;
+      height: auto;
+      max-height: 100%;
+      object-fit: contain;
+    }
+    .heart {
+      position: absolute;
+      bottom: -20px;
+      font-size: 2rem;
+      animation: floatUp 4s ease-in-out infinite;
+      color: #007bff;
+    }
+    @keyframes floatUp {
+      0% {
+        transform: translateY(0) scale(0.8);
+        opacity: 1;
+      }
+      50% {
+        transform: translateY(-50vh) scale(1.2);
+        opacity: 0.8;
+      }
+      100% {
+        transform: translateY(-100vh) scale(1);
+        opacity: 0;
+      }
     }
   </style>
 </head>
@@ -89,12 +110,13 @@
       document.getElementById('question').classList.add('hidden');
       
       let responseText = "";
-      let retryButton = ""; // Variable para el botón de reintentar
-      let image = ""; // Variable para insertar la imagen
+      let retryButton = ""; 
+      let image = ""; 
 
       if (choice === 'yes') {
         responseText = "Te amo mucho mi niña🩵";
-        image = '<img src="foto.jpg" alt="Imagen de amor">'; // Aquí insertamos la imagen
+        image = '<img src="foto.jpg" alt="Imagen de amor">';
+        createHearts(); // Iniciar animación de corazones
       } else if (choice === 'no') {
         responseText = "¡TE HAS EQUIVOCADO ES QUE SI!";
         retryButton = '<button id="retry-button" onclick="retry()">Intentalo de nuevo mi niña</button>';
@@ -113,6 +135,20 @@
       // Volver a mostrar la pregunta y los botones
       document.getElementById('question').classList.remove('hidden');
       document.getElementById('response').innerHTML = "";
+    }
+
+    function createHearts() {
+      for (let i = 0; i < 30; i++) {
+        const heart = document.createElement('div');
+        heart.className = 'heart';
+        heart.textContent = '🩵';
+        heart.style.left = `${Math.random() * 100}vw`; // Posición horizontal aleatoria
+        heart.style.animationDelay = `${Math.random() * 1}s`; // Retardo aleatorio
+        document.body.appendChild(heart);
+
+        // Eliminar el corazón después de la animación
+        setTimeout(() => heart.remove(), 4000);
+      }
     }
   </script>
 </body>
